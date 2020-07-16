@@ -1,0 +1,167 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+
+\title{Estimation of Spectral Risk Measures}
+\author{AJAY KUMAR PANDEY}
+
+\date{JUNE 2020}
+\department{COMPUTER SCIENCE AND ENGINEERING}
+
+%\nocite{*}
+\maketitle
+\label{key}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Certificate
+\certificate
+
+\vspace*{0.5in}
+
+\noindent This is to certify that the thesis titled {\bf Estimation of Spectral Risk Measures}, submitted by {\bf Ajay Kumar Pandey}, 
+  to the Indian Institute of Technology, Madras, for
+the award of the degree of {\bf Master of Science (by Research)}, is a bonafide
+record of the research work done by him under our supervision.  The
+contents of this thesis, in full or in parts, have not been submitted
+to any other Institute or University for the award of any degree or
+diploma.
+
+\vspace*{1.5in}
+
+\begin{singlespacing}
+\hspace*{-0.25in}
+\parbox{5in}{
+\noindent {\bf Dr. Prashanth L.A.} \\
+\noindent Research Advisor \\ 
+\noindent Assistant Professor \\
+\noindent Department of Computer Science and Engineering\\
+\noindent Indian Institute of Technology Madras, 600036 \\
+} 
+
+\end{singlespacing}
+\vspace*{0.25in}
+
+\noindent Place: Chennai\\
+Date: 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acknowledgements
+\acknowledgements
+
+First and foremost, I would like to express my sincere thankfulness to my research advisor, Dr. Prashanth L.A., who has the substance of an expert: he convincingly guided and encouraged me to be professional and do the right thing even when the road got tough. The door to my advisor's office was always open whenever I ran into a trouble spot or had a question about my research or writing. Without his steady assistance, the objective of this thesis would not have been completed.
+
+Second, I would like to thank Dr. Sanjay P. Bhat, Tata Consultancy Services Limited, Hyderabad, whose valuable feedback and ideas improved the quality of this thesis considerably. I would also like to thank my General Test Committee members, Dr. Sutanu Chakraborti, Dr. Puduru Viswanadha Reddy, and Dr. Madhu Mutyam, for their immense guidance and valuable feedback.
+
+Third, I am also grateful to the Computer Science and Engineering department in particular and the Indian Institute of Technology Madras in general for providing an excellent environment for doing research. Furthermore, I want to thank my friends: Nirav, Sidharth, Rajendra, Pawandeep, and many others, who made my stay pleasant as ever on the campus for the last three years.
+
+Finally, I must express my very profound gratitude to my family: my parents, my brother, and my sister, for providing me with unfailing support and continuous encouragement throughout my years of study and through the process of research and writing this thesis. This accomplishment would not have been possible without them. Thank you.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+
+\abstract
+
+\noindent KEYWORDS: \hspace*{0.5em} \parbox[t]{4.4in}{Spectral risk measures, Value-at-Risk, Conditional Value-at-Risk, Estimation technique, Concentration bounds, Bounded distributions, Gaussian distribution, Exponential distribution.}
+
+\vspace*{24pt}
+
+\noindent 
+Programming loosely connected distributed applications is a challenging
+endeavour. Loosely connected distributed applications such as geo-distributed
+stores and intermittently reachable IoT devices cannot afford to coordinate
+among all of the replicas in order to ensure data consistency due to
+prohibitive latency costs and the impossibility of coordination if
+availability is to be ensured. Thus, the state of the replicas evolves
+independently, making it difficult to develop correct applications. Existing
+solutions to this problem limit the data types that can be used in these
+applications, which neither offer the ability to compose them to construct
+more complex data types nor offer transactions.
+
+In this paper, we describe Banyan, a distributed programming model for
+developing loosely connected distributed applications. Data types in Banyan
+are equipped with a three-way merge function a la Git to handle conflicts.
+Banyan provides isolated transactions for grouping together individual
+operations which do not require coordination among different replicas. We
+instantiate Banyan over Cassandra, an off-the-shelf industrial-strength
+distributed store. Several benchmarks, including a distributed build-cache,
+illustrates the effectiveness of the approach.
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of contents etc.
+
+\begin{singlespace}
+\tableofcontents
+\thispagestyle{empty}
+
+\listoftables
+\addcontentsline{toc}{chapter}{LIST OF TABLES}
+\listoffigures
+\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+\end{singlespace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbreviations
+\abbreviations
+
+\noindent 
+\begin{tabbing}
+xxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill
+%\textbf{IITM}   \> Indian Institute of Technology, Madras \\
+%\textbf{MS}   \> Master of Science (by Research) \\
+%\textbf{RL} \> Reinforcement Learning \\
+\textbf{OR} \> Operation Research\\
+\textbf{AI} \> Artificial Intelligence  \\
+\textbf{VaR} \> Value-at-Risk \\
+\textbf{CVaR} \> Conditional Value-at-Risk \\
+\textbf{CPT} \> Cummulative Prospect Theory  \\
+\textbf{SRM} \> Spectral Risk Measures \\
+\textbf{EDF} \> Empirical Distribution Function \\
+\textbf{SR} \> Successive Rejects \\
+\textbf{SUMO} \> Simulation of Urban Mobility \\
+%\textbf{i.i.d.} \> Independent and identically distributed \\
+%\textbf{r.v.} \> Random variable \\
+\textbf{MVRM} \> Mean-Variance Risk Measure \\
+\textbf{PDF} \> Probability density function \\
+\textbf{CDF} \> Cumulative distribution function \\
+\textbf{} \>  \\
+\textbf{} \>  \\
+\textbf{} \>  \\
+
+\end{tabbing}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Notation
+%
+%\chapter*{\centerline{NOTATION}}
+%\addcontentsline{toc}{chapter}{NOTATION}
+%
+%\begin{singlespace}
+%\begin{tabbing}
+%xxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill
+%\textbf{$\varphi(\cdot)$} \> risk aversion function\\
+%\textbf{$\mu$}  \> mean\\
+%\textbf{${\sigma}^2$}  \> variance \\
+%%\textbf{$\beta$}   \> Confidence level \\
+%%\textbf{$\alpha$}   \> Confidence level \\
+%\textbf{$\mathrm{V_\beta(X)}$} \> $\mathrm{VaR}$ at the level $\beta$ of r.v. $X$, see definition \ref{def:var}.\\
+%\textbf{$\mathrm{C_\beta(X)}$} \> $\mathrm{CVaR}$ at the level $\beta$ of r.v. $X$, see definition \ref{def:cvar} \\
+%\textbf{$\mathrm{S(X)}$} \> $\mathrm{SRM}$ of r.v. $X$, see definition \ref{def:srm}. \\
+%\textbf{$\widehat{\mathrm{V}}_{n, \beta}$} \> Estimation of $\mathrm{VaR}$ at the level $\beta$\\
+%\textbf{$\mathrm{\widehat{C}_{\alpha,m}}$} \> Estimation of $\mathrm{VaR}$ at the level $\beta$\\
+%\end{tabbing}
+%\end{singlespace}
+%
+%\pagebreak
+%\clearpage
+
+% The main text will follow from this point so set the page numbering
+% to arabic from here on.
+\pagenumbering{arabic}
+%%%%%%%%%%%
+%%%%%%%%%%%%%
+%%%%%%%%%%%

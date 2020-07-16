@@ -1,0 +1,340 @@
+\documentclass[MS]{iitmdiss}
+\usepackage{times}
+ \usepackage{t1enc}
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[driverfallback=dvipdfm]{hyperref} % hyperlinks for references.
+\usepackage{amsmath} % easier math formulae, align, subequations \ldots
+%%%%%%%%%%%%%%%%
+\usepackage{macros}
+%%\usepackage{authblk}
+\RequirePackage{algorithm}
+\RequirePackage{algorithmic}
+\usepackage{caption}
+%\usepackage[numbers]{natbib}
+%%%%%%%%%%%%%
+\usepackage{enumitem}
+%\usepackage{svg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[runningheads]{llncs}
+\usepackage{booktabs}   %% For formal tables:
+%% http://ctan.org/pkg/booktabs
+%\usepackage{subcaption} %% For complex figures with subfigures/subcaptions
+%% http://ctan.org/pkg/subcaption
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{inconsolata}
+
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{cleveref}
+\newcommand{\clearemptydoublepage}{\newpage{\cleardoublepage}}
+
+\definecolor{Bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{MidnightBlue}{rgb}{0.0, 0.2, 0.4}
+\definecolor{BrightBlue}{rgb}{0.0, 0.2, 0.7}
+\definecolor{byzantine}{rgb}{0.74, 0.2, 0.64}
+\definecolor{caribbeangreen}{rgb}{0.0, 0.8, 0.6}
+
+\lstset{
+	language=caml,
+	basicstyle=\ttfamily\small,
+	flexiblecolumns=false,
+	tabsize=2,
+	escapechar=',
+	%basewidth={0.5em,0.45em},
+	%aboveskip={3pt},
+	%belowskip={3pt},
+	keywordstyle=\color{Bittersweet}\bfseries,
+	commentstyle=\color{blue}\itshape,
+	stringstyle=\color{MidnightBlue},
+	keywords=[2]{def, barrier, atomic},
+	keywordstyle=[2]\color{Bittersweet}\bfseries,
+	keywords=[3]{close, connect, publish, refresh, write, read},
+	keywordstyle=[3]\color{byzantine}\bfseries,
+	keywords=[4]{MARK, MARK_FINAL, SWEEP_EPHE},
+	keywordstyle=[4]\color{caribbeangreen}\bfseries,
+	classoffset=1,
+	upquote=true,
+	keywordstyle=\color{byzantine}\bfseries,
+	classoffset=0,
+	mathescape=true,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt
+}
+
+\lstMakeShortInline[columns=fullflexible]|
+
+\newcommand{\ml}[1]{\lstinline[language=caml]{#1}}
+
+\newcommand{\name}{Banyan\xspace}
+
+%\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+
+\title{Banyan: Coordination-free Distributed Transactions over Mergeable Types}
+
+\author{Shashank Shekhar Dubey}
+
+\date{July 2020}
+\department{COMPUTER SCIENCE AND ENGINEERING}
+
+%\nocite{*}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Certificate
+
+%\pagebreak
+%\newpage
+% \ 
+%\thispagestyle{empty}
+%\clearpage
+
+\clearemptydoublepage
+\certificate
+
+\vspace*{0.5in}
+
+\noindent This is to certify that the thesis titled {\bf Banyan: Coordination-free Distributed Transactions over Mergeable Types}, submitted by {\bf Shashank Shekhar Dubey}, to the Indian Institute of Technology Madras, for the award of the degree of {\bf Master of Science (Research)}, is a bonafide
+record of the research work done by him under my supervision. The contents of this thesis, in full or in parts, have not been submitted to any other Institute or University for the award of any degree or diploma.
+
+\vspace*{1.5in}
+
+\begin{singlespacing}
+	%\hspace*{-0.25in}
+	%\hspace*{1.0in} 
+	%\parbox{2.0in}{
+	\noindent {\bf Dr. KC Sivaramakrishnan} \\
+	\noindent Research Guide \\ 
+	\noindent Assistant Professor \\
+	\noindent Dept. of Computer Science and Engineering\\
+	\noindent IIT-Madras, Chennai - 600 036 \\
+	%}  
+\end{singlespacing}
+\\
+\\
+\noindent Place: Chennai\\
+Date: 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acknowledgements
+\clearemptydoublepage
+\acknowledgements
+%To be written.
+\input{ack}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+
+\abstract
+
+\noindent KEYWORDS: \hspace*{0.5em} \parbox[t]{4.4in}{Distributed applications, Consistency, Git, Irmin, 3-way merge, Programming model}
+
+\vspace*{24pt}
+
+\noindent 
+Programming loosely connected distributed applications is a challenging
+endeavour. Loosely connected distributed applications such as geo-distributed
+stores and intermittently reachable IoT devices cannot afford to coordinate
+among all of the replicas in order to ensure data consistency due to
+prohibitive latency costs and the impossibility of coordination if
+availability is to be ensured. Thus, the state of the replicas evolves
+independently, making it difficult to develop correct applications. Existing
+solutions to this problem limit the data types that can be used in these
+applications, which neither offer the ability to compose them to construct
+more complex data types nor offer transactions.
+
+In this paper, we describe Banyan, a distributed programming model for
+developing loosely connected distributed applications. Data types in Banyan
+are equipped with a three-way merge function a la Git to handle conflicts.
+Banyan provides isolated transactions for grouping together individual
+operations which do not require coordination among different replicas. We
+instantiate Banyan over Cassandra, an off-the-shelf industrial-strength
+distributed store. Several benchmarks, including a distributed build-cache,
+illustrates the effectiveness of the approach.
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Table of contents etc.
+%\clearemptydoublepage
+\begin{singlespace}
+	\tableofcontents
+	%\thispagestyle{empty}
+	
+	\clearemptydoublepage
+	\listoftables
+	\addcontentsline{toc}{chapter}{LIST OF TABLES}
+	
+	
+	%\clearemptydoublepage
+	\listoffigures
+	\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+\end{singlespace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbreviations
+%\clearemptydoublepage
+\abbreviations
+
+\noindent 
+\begin{tabbing}
+
+	
+	
+\end{tabbing}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Notations
+
+\clearemptydoublepage
+\chapter*{\centerline{NOTATIONS}}
+\addcontentsline{toc}{chapter}{NOTATIONS}
+
+
+
+\pagebreak
+\clearpage
+
+% The main text will follow from this point so set the page numbering
+% to arabic from here on.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Introduction.
+\clearemptydoublepage
+\pagenumbering{arabic}
+
+\chapter{Introduction}
+\label{chap:introduction}
+\input{Introduction.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\input{Preliminary.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Introduction.
+%\clearemptydoublepage
+%\pagenumbering{arabic}
+
+%\chapter{Introduction}
+%\label{chap:introduction}
+%\input{Introduction.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{Introduction.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Motivation.
+\clearemptydoublepage
+%\pagenumbering{arabic}
+
+\chapter{Motivation}
+\label{chap:motivation}
+\input{motivation.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Programming model.
+\clearemptydoublepage
+%\pagenumbering{arabic}
+
+\chapter{Programming Model}
+\label{chap:prog_model}
+\input{prog_model.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Implementation
+\clearemptydoublepage
+%\pagenumbering{arabic}
+
+\chapter{Implementation}
+\label{chap:implementation}
+\input{implementation.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Evaluation
+\clearemptydoublepage
+%\pagenumbering{arabic}
+
+\chapter{Evaluation}
+\label{chap:evaluation}
+\input{evaluation.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Related Work
+\clearemptydoublepage
+%\pagenumbering{arabic}
+
+\chapter{Related Work}
+\label{chap:related_work}
+\input{related_work.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Conclusion
+\clearemptydoublepage
+%\pagenumbering{arabic}
+
+\chapter{Conclusion}
+\label{chap:conclusion}
+\input{conclusion.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\input{implementation.tex}
+%\input{evaluation.tex}
+%\input{related_work.tex}
+%\input{conclusion.tex}
+%\input{simulation-exp.tex}
+%\input{cvar-results.tex}
+%\input{conclusions.tex}
+%\input{appendix.tex}
+%\input{zero.tex}
+%%%%%%%%%%%
+%%%%%%%%%%%
+%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography.
+
+\begin{singlespace}
+  \bibliography{banyan}
+\end{singlespace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% List of papers
+
+\listofpapers
+
+%\begin{enumerate}  
+%\item A. K. Pandey, L. A. Prashanth and S. P. Bhat,  \newblock
+%\textit{Estimation of Spectral Risk Measures}, under review in Operation research letters, and preprint is available on arXiv:1912.10398
+  %\newblock {\em Journal}, Volume,
+  %Page, (year).
+%\end{enumerate}  
+
+\end{document}

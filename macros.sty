@@ -1,0 +1,51 @@
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % for professional tables
+%%%%% start My packages
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{changepage}
+\usepackage{float}
+\allowdisplaybreaks
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\usepackage{todonotes}
+
+\newtheorem{remark}{Remark}
+\newtheorem{assumption}{Assumption}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{assumption1*}{\assumptionnumber}
+\providecommand{\assumptionnumber}{}
+\makeatletter
+\newenvironment{assumption1}[2]
+ {%
+  \renewcommand{\assumptionnumber}{Assumption #1-$\mathcal{#2}$}%
+  \begin{assumption*}%
+  \protected@edef\@currentlabel{#1-$\mathcal{#2}$}%
+ }
+ {%
+  \end{assumption*}
+ }
+\makeatother
+%\begin{assumption}{1}{F}\label{1F}
+%Something
+%\end{assumption}
+%Here's the reference: \ref{1F}
+
+\newcommand{\V}{{\mathrm{V}}}
+\newcommand{\indic}[1]{\mathbb{I}\left\{#1\right\}} % Indicator function
+
+%%% end my packages
+
+\usepackage{hyperref}
+

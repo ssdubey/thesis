@@ -1,0 +1,25 @@
+\BOOKMARK [0][-]{chapter*.1}{ACKNOWLEDGEMENTS}{}% 1
+\BOOKMARK [0][-]{chapter*.2}{ABSTRACT}{}% 2
+\BOOKMARK [0][-]{chapter*.4}{LIST OF TABLES}{}% 3
+\BOOKMARK [0][-]{chapter*.5}{LIST OF FIGURES}{}% 4
+\BOOKMARK [0][-]{chapter*.6}{ABBREVIATIONS}{}% 5
+\BOOKMARK [0][-]{chapter*.7}{NOTATIONS}{}% 6
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 7
+\BOOKMARK [0][-]{chapter.2}{Motivation}{}% 8
+\BOOKMARK [1][-]{section.2.1}{A Distributed Build Cache}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.1.1}{Mergeable types}{section.2.1}% 10
+\BOOKMARK [2][-]{subsection.2.1.2}{Transactions}{section.2.1}% 11
+\BOOKMARK [0][-]{chapter.3}{Programming Model}{}% 12
+\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 13
+\BOOKMARK [1][-]{subsection.4.0.1}{Irmin data model}{chapter.4}% 14
+\BOOKMARK [2][-]{subsection.4.0.2}{Cassandra instantiation}{subsection.4.0.1}% 15
+\BOOKMARK [2][-]{subsection.4.0.3}{Recursive merges}{subsection.4.0.1}% 16
+\BOOKMARK [2][-]{subsection.4.0.4}{Garbage collection}{subsection.4.0.1}% 17
+\BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 18
+\BOOKMARK [1][-]{subsection.5.0.1}{Experimental setup}{chapter.5}% 19
+\BOOKMARK [2][-]{subsection.5.0.2}{Baseline overheads}{subsection.5.0.1}% 20
+\BOOKMARK [2][-]{subsection.5.0.3}{Mergeable Types}{subsection.5.0.1}% 21
+\BOOKMARK [2][-]{subsection.5.0.4}{Distributed build cache}{subsection.5.0.1}% 22
+\BOOKMARK [0][-]{chapter.6}{Related Work}{}% 23
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 24
+\BOOKMARK [1][-]{section.7.1}{Conclusion}{chapter.7}% 25

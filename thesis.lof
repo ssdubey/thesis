@@ -1,0 +1,20 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A slice of the build cache key-value store.\relax }}{5}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Compiling \texttt {lwt\_mutex.ml}.\relax }}{6}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Merging conflicting statistics updates.\relax }}{6}{figure.caption.10}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Banyan\xspace system and programming model.\relax }}{8}{figure.caption.12}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces A sample Irmin store. The rectangles are tags, diamonds are commit objects, octagons are tree object, and circles are blob objects.\relax }}{11}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Recursive merge. Rounded rectangles are the results of recursive merges.\relax }}{13}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Garbage collection. Here, the commits \texttt {p0-c0} and \texttt {s0-c0} may be deleted.\relax }}{15}{figure.caption.15}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Performance comparison between Banyan\xspace and Cassandra on LWW string value.\relax }}{18}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Performance of counter MRDT.\relax }}{19}{figure.caption.18}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces A snapshot of linked log storage.\relax }}{20}{figure.caption.21}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Performance of mergeable logs.\relax }}{20}{figure.caption.22}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Performance of complete reuse of build artefacts.\relax }}{20}{figure.caption.23}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Performance of partial reuse of build artefacts.\relax }}{21}{figure.caption.24}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }

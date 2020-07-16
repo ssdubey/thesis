@@ -1,0 +1,80 @@
+When applications replicate data across different sites, they need to make a
+fundamental choice regarding the consistency of data. Strong consistency properties such
+as Linearizability~\cite{Herlihy90} and Serializability~\cite{Bernstein79}
+makes it easier to design correct applications. However, strong consistency is often at
+odds with high performance. Strong consistency necessitates that all the replicas
+coordinate to agree on a global order in which any conflicting operations are
+resolved. The CAP theorem~\cite{Gilbert02} and PACELC theorem~\cite{Abadi12}
+state that strongly consistent applications exhibit higher latencies when the all
+the replicas are reachable, and they are unavailable when some of the replicas are
+unreachable. This limitation has spurred the development of commercial weakly
+consistent distributed databases for wide-area applications such as
+DynamoDB~\cite{DynamoDB}, Cassandra~\cite{Cassandra}, CosmosDB~\cite{CosmosDB}
+and Riak~\cite{Riak}. However, developing correct applications under weak
+consistency is challenging due to the fact that the operations may be reordered
+in complex ways even if issued by the same session~\cite{Burckhardt14}.
+Moreover, these databases only offer a limited set of sequential data types
+with a built-in conflict resolution strategies such as last-write-wins and
+multi-valued objects. Such built-in conflict resolution leads to anomalies such
+as write-skew~\cite{Berenson95} which makes it difficult (and often impossible)
+to develop complex applications with rich behaviours.
+
+Rather than programming with sequential data types while reasoning about their
+semantics in a weakly consistent setting, an alternative strategy is to equip
+the data types with the ability to reconcile conflicts. Kaki et
+al.~\cite{Kaki19} recently proposed Mergeable Replicated Data Types (MRDTs) as
+a way to automatically derive correct distributed variants of ordinary data
+types. The inductively defined data types are equipped with an invertible
+relational specification which is used to derive a three-way merge function \`a
+la Git~\cite{Git}, a distributed version control system.
+
+What does it take to make MRDTs a practical alternative to implementing
+high-throughput, low-latency distributed applications such as the ones that
+would be implemented over industrial-strength distributed databases? There are
+several key challenges to getting there.
+
+Firstly, while MRDTs define merge semantics for
+operations on individual objects, Kaki et al. do not describe the semantics of
+composition of operations on multiple objects -- i.e. transactions. Transactions
+are indispensable for building complex applications. Strongly consistent
+distributed transactions suffer from unavailability~\cite{Abadi12}, whereas
+highly-available transactions~\cite{Bailis13} combined with weakly consistent
+operations often lead to incomprehensible behaviours~\cite{Viotti16}.
+
+Secondly, MRDTs impose significant burden on the storage and network layer
+to be able to support three-way merges to reconcile conflicts. Kaki et al.
+implement MRDTs over Irmin~\cite{Irmin}, a Git-like store for arbitrary
+objects, not just files. As with Git, in order to reconcile conflicts,
+three-way merges in MRDTs require the storage layer to record enough history to
+be able to retrieve the \emph{lowest common ancestor} (LCA) state. For a
+distributed database, performance of the network layer is quite important for
+throughput and latency. Industrial-strength distributed databases use gossip
+protocols~\cite{Kermarrec07} to quickly disseminate updates in order to ensure
+fast convergence between the replicas. Git comes equipped with a remote
+protocol for transferring objects between remote sites using \emph{push} and
+\emph{pull} mechanisms. Unfortunately, directly using the Git remote protocols
+would mean that the client will have to name branches explicitly, complicating
+the programming model. The onus is on the client to ensure that all the
+branches that have updates are merged in order to ensure that there is
+convergence. This is undesirable.
+
+\paragraph*{\textbf{Contributions.}} In this paper, we present \name, a
+programming model for building loosely connected distributed applications that provides
+coordination-free transactions over MRDTs. \name provides per-object causal
+consistency, and the transaction model is built on the principles of Git-like
+branches. Rather than relying on Git remote protocol for dissemination across
+replicas, we instantiate \name on top of Cassandra, an industrial-strength,
+off-the-shelf distributed store~\cite{10.1145/1773912.1773922}. Unlike Git,
+\name does not expose named branches explicitly, and ensures eventual
+convergence. Importantly, \name only relies on eventual consistency, and \name
+can be instantiated on any eventually consistent key-value store. Extensive
+evaluation shows that \name makes it easy to build complex high-performance
+distributed applications.
+
+The rest of the paper is organised as follows. We motivate the \name model by
+designing a distributed build cache in the next section.
+Section~\ref{sec:model} describes the \name programming model.
+Section~\ref{sec:impl} describes the instantiation of \name on Cassandra. We
+evaluate the instantiation of \name on top of Cassandra in
+section~\ref{sec:eval}. Sections~\ref{sec:related} and \ref{sec:conc} present
+the related work and conclusions, respectively.

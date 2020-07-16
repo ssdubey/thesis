@@ -1,0 +1,46 @@
+Several prior works have addressed the challenge of balancing the
+programmability and performance under eventual consistency. RedBlue
+consistency~\cite{Li12} offers causal consistency by default (blue), but
+operations that require strong consistency (red) are executed in single total
+order. Quelea~\cite{Sivaramakrishnan15} and MixT~\cite{Milano18} offer
+automated analysis for classifying and executing operations are different
+consistency levels embedded in weakly isolated transactions, paying the cost of
+proportional to the consistency level. Indeed, mixing weaker consistency and
+transactions have been well-studied~\cite{Brutschy17,Kraska13,CosmosDB}.
+
+\name only supports causal consistency, but it is known to be the strongest
+consistency level that remains available~\cite{Llyod11}. While prior works
+attempt to reconcile traditional isolation levels with weak consistency, \name
+leaves the choice of reading and writing updates to and from other transactions
+to the client through the use of |publish| and |refresh|. We believe that
+traditional database isolation levels are already quite difficult to get
+right~\cite{Kaki17}, and attempting to provide a fixed set of poorly understood
+isolation levels under weak consistency will lead to proliferation of bugs.
+
+\name is distinguished by the equipping data types with the ability to handle
+conflicts (three-way merge functions). \name builds on top of
+Irmin~\cite{Irmin} library. Irmin allows arbitrary branching and merging
+between different branches at the cost of having to expose the branch name.
+\name refreshes and publishes implicitly to the public branch at a repository,
+which obviates the need for naming branches explicitly. Irmin does not include
+a distribution and convergence layer; \name uses Cassandra for this purpose.
+\name provides causal consistency and coordination free transactions over
+weakly consistent Cassandra. Several prior work have similarly obtained
+stronger guarantees weaker stores~\cite{Sivaramakrishnan15,Bailis13b}.
+
+TARDiS~\cite{Crooks16} supports user-defined data types, and a transaction
+model similar to \name. TARDiS is however a machine model that exposes the
+details of explicit branches and merges to the developer, whereas \name is a
+programming model that can be instantiated on any eventually consistent
+key-value store. For instance, in TARDiS programmers need to invoke a separate
+merge transaction that does an n-way merge. \name transaction model is more
+flexible than TARDiS. For example, \name can support monotonic atomic view,
+which TARDiS cannot -- TARDiS transactions do not have a way of allowing more
+recent updates since the transaction began. TARDiS does not discuss merges
+without LCAs or the issue with recursive merges. We found recursive merges to
+be a very common occurrence in practice. Concurrent
+revisions~\cite{Burckhardt12} describe a programming model with branch and
+merge workflow with explicit branches and restrictions on the shape of history
+graphs. \name makes the choice of branches to publish and refresh implicit
+leading to a simpler model. Concurrent revisions does not include an
+implementation.

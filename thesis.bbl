@@ -1,0 +1,245 @@
+\begin{thebibliography}{34}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{Abadi(2012)}]{Abadi12}
+{\bf Abadi, D.} (2012).
+\newblock {Consistency Tradeoffs in Modern Distributed Database System Design:
+  CAP is Only Part of the Story}.
+\newblock {\em Computer\/}, {\bf 45}(2), 37--42.
+\newblock ISSN 0018-9162.
+
+\bibitem[{Amazon DynamoDB()}]{DynamoDB}
+Amazon DynamoDB (2020).
+\newblock {Amazon DynamoDB: Fast and flexible NoSQL database service for any
+  scale}.
+\newblock \urlprefix\url{https://aws.amazon.com/dynamodb/}.
+
+\bibitem[{Apache Cassandra()}]{Cassandra}
+Apache Cassandra (2020).
+\newblock {Apache Cassandra: The right choice when you need scalability and
+  high availability without compromising performance}.
+\newblock \urlprefix\url{https://cassandra.apache.org/}.
+
+\bibitem[{Azure CosmosDB()}]{CosmosDB}
+Azure CosmosDB (2020).
+\newblock {Azure CosmosDB: Build or modernise scalable, high-performance apps}.
+\newblock
+  \urlprefix\url{https://azure.microsoft.com/en-in/services/cosmos-db/}.
+
+\bibitem[{Bailis {\em et~al.\/}(2013{\natexlab{{\em a\/}}})Bailis, Davidson,
+  Fekete, Ghodsi, Hellerstein, and Stoica}]{Bailis13}
+{\bf Bailis, P.}, {\bf A.~Davidson}, {\bf A.~Fekete}, {\bf A.~Ghodsi}, {\bf
+  J.~M. Hellerstein}, and {\bf I.~Stoica} (2013{\natexlab{{\em a\/}}}).
+\newblock {Highly Available Transactions: Virtues and Limitations}.
+\newblock {\em Proc. VLDB Endow.\/}, {\bf 7}(3), 181--192.
+\newblock ISSN 2150-8097.
+
+\bibitem[{Bailis {\em et~al.\/}(2013{\natexlab{{\em b\/}}})Bailis, Ghodsi,
+  Hellerstein, and Stoica}]{Bailis13b}
+{\bf Bailis, P.}, {\bf A.~Ghodsi}, {\bf J.~M. Hellerstein}, and {\bf
+  I.~Stoica}, {Bolt-on Causal Consistency}.
+\newblock {\em In\/} {\em Proceedings of the 2013 ACM SIGMOD International
+  Conference on Management of Data\/}, SIGMOD '13. 2013{\natexlab{{\em b\/}}}.
+\newblock ISBN 9781450320375.
+
+\bibitem[{Bazel()}]{Bazel}
+Bazel (2020).
+\newblock {Bazel: A fast, scalable, multi-language build system}.
+\newblock \urlprefix\url{https://bazel.build/}.
+
+\bibitem[{Berenson {\em et~al.\/}(1995)Berenson, Bernstein, Gray, Melton,
+  O'Neil, and O'Neil}]{Berenson95}
+{\bf Berenson, H.}, {\bf P.~Bernstein}, {\bf J.~Gray}, {\bf J.~Melton}, {\bf
+  E.~O'Neil}, and {\bf P.~O'Neil} (1995).
+\newblock {A Critique of ANSI SQL Isolation Levels}.
+\newblock {\em SIGMOD Rec.\/}, {\bf 24}(2), 1--10.
+\newblock ISSN 0163-5808.
+
+\bibitem[{Bernstein {\em et~al.\/}(1979)Bernstein, Shipman, and
+  Wong}]{Bernstein79}
+{\bf Bernstein, P.~A.}, {\bf D.~W. Shipman}, and {\bf W.~S. Wong} (1979).
+\newblock {Formal Aspects of Serializability in Database Concurrency Control}.
+\newblock {\em IEEE Trans. Softw. Eng.\/}, {\bf 5}(3), 203--216.
+\newblock ISSN 0098-5589.
+
+\bibitem[{Brutschy {\em et~al.\/}(2017)Brutschy, Dimitrov, M\"{u}ller, and
+  Vechev}]{Brutschy17}
+{\bf Brutschy, L.}, {\bf D.~Dimitrov}, {\bf P.~M\"{u}ller}, and {\bf
+  M.~Vechev}, {Serializability for Eventual Consistency: Criterion, Analysis,
+  and Applications}.
+\newblock {\em In\/} {\em Proceedings of the 44th ACM SIGPLAN Symposium on
+  POPL\/}, POPL 2017. 2017.
+\newblock ISBN 9781450346603.
+
+\bibitem[{Burckhardt {\em et~al.\/}(2014)Burckhardt, Gotsman, Yang, and
+  Zawirski}]{Burckhardt14}
+{\bf Burckhardt, S.}, {\bf A.~Gotsman}, {\bf H.~Yang}, and {\bf M.~Zawirski}
+  (2014).
+\newblock {Replicated Data Types: Specification, Verification, Optimality}.
+\newblock {\em SIGPLAN Not.\/}, {\bf 49}(1), 271--284.
+\newblock ISSN 0362-1340.
+
+\bibitem[{Burckhardt {\em et~al.\/}(2012)Burckhardt, Leijen, F\"{a}hndrich, and
+  Sagiv}]{Burckhardt12}
+{\bf Burckhardt, S.}, {\bf D.~Leijen}, {\bf M.~F\"{a}hndrich}, and {\bf
+  M.~Sagiv}, {Eventually Consistent Transactions}.
+\newblock {\em In\/} {\em ESOP 2012\/}, ESOP'12. 2012.
+\newblock ISBN 9783642288685.
+
+\bibitem[{Crain and Shapiro(2015)}]{Crain15}
+{\bf Crain, T.} and {\bf M.~Shapiro}, {Designing a Causally Consistent Protocol
+  for Geo-Distributed Partial Replication}.
+\newblock {\em In\/} {\em Proceedings of the First Workshop on Principles and
+  Practice of Consistency for Distributed Data\/}, PaPoC '15. 2015.
+\newblock ISBN 9781450335379.
+
+\bibitem[{Crooks {\em et~al.\/}(2016)Crooks, Pu, Estrada, Gupta, Alvisi, and
+  Clement}]{Crooks16}
+{\bf Crooks, N.}, {\bf Y.~Pu}, {\bf N.~Estrada}, {\bf T.~Gupta}, {\bf
+  L.~Alvisi}, and {\bf A.~Clement}, {TARDiS: A Branch-and-Merge Approach To
+  Weak Consistency}.
+\newblock {\em In\/} {\em Proceedings of the 2016 International Conference on
+  Management of Data\/}, SIGMOD '16. 2016.
+\newblock ISBN 9781450335317.
+
+\bibitem[{Driscoll {\em et~al.\/}(1986)Driscoll, Sarnak, Sleator, and
+  Tarjan}]{Driscoll86}
+{\bf Driscoll, J.~R.}, {\bf N.~Sarnak}, {\bf D.~D. Sleator}, and {\bf R.~E.
+  Tarjan}, {Making Data Structures Persistent}.
+\newblock {\em In\/} {\em Proceedings of the Eighteenth Annual ACM Symposium on
+  Theory of Computing\/}, STOC '86. 1986.
+\newblock ISBN 0897911938.
+
+\bibitem[{Farinier {\em et~al.\/}(2015)Farinier, Gazagnaire, and
+  Madhavapeddy}]{farinier15}
+{\bf Farinier, B.}, {\bf T.~Gazagnaire}, and {\bf A.~Madhavapeddy}, {Mergeable
+  Persistent Data Structures}.
+\newblock {\em In\/} {\em Vingt-sixi{\`e}mes Journ{\'e}es Francophones des
+  Langages Applicatifs (JFLA 2015)\/}. 2015.
+
+\bibitem[{Gilbert and Lynch(2002)}]{Gilbert02}
+{\bf Gilbert, S.} and {\bf N.~Lynch} (2002).
+\newblock {Brewer's Conjecture and the Feasibility of Consistent, Available,
+  Partition-Tolerant Web Services}.
+\newblock {\em SIGACT News\/}, {\bf 33}(2), 51--59.
+\newblock ISSN 0163-5700.
+
+\bibitem[{Git()}]{Git}
+Git (2020).
+\newblock {Git: A distributed version control system}.
+\newblock \urlprefix\url{https://git-scm.com/}.
+
+\bibitem[{Gradle()}]{Gradle}
+Gradle (2020).
+\newblock {Gradle: An open-source build automation tool}.
+\newblock \urlprefix\url{https://gradle.org/}.
+
+\bibitem[{Herlihy and Wing(1990)}]{Herlihy90}
+{\bf Herlihy, M.~P.} and {\bf J.~M. Wing} (1990).
+\newblock {Linearizability: A Correctness Condition for Concurrent Objects}.
+\newblock {\em ACM Trans. Program. Lang. Syst.\/}, {\bf 12}(3), 463--492.
+\newblock ISSN 0164-0925.
+
+\bibitem[{Irmin()}]{Irmin}
+Irmin (2020).
+\newblock {Irmin: A distributed database built on the principles of Git}.
+\newblock \urlprefix\url{https://irmin.org/}.
+
+\bibitem[{Kaki {\em et~al.\/}(2017)Kaki, Nagar, Najafzadeh, and
+  Jagannathan}]{Kaki17}
+{\bf Kaki, G.}, {\bf K.~Nagar}, {\bf M.~Najafzadeh}, and {\bf S.~Jagannathan}
+  (2017).
+\newblock {Alone Together: Compositional Reasoning and Inference for Weak
+  Isolation}.
+\newblock {\em Proc. ACM Program. Lang.\/}, {\bf 2}(POPL).
+
+\bibitem[{Kaki {\em et~al.\/}(2019)Kaki, Priya, Sivaramakrishnan, and
+  Jagannathan}]{Kaki19}
+{\bf Kaki, G.}, {\bf S.~Priya}, {\bf K.~Sivaramakrishnan}, and {\bf
+  S.~Jagannathan} (2019).
+\newblock {Mergeable Replicated Data Types}.
+\newblock {\em Proc. ACM Program. Lang.\/}, {\bf 3}(OOPSLA).
+
+\bibitem[{Kermarrec and van Steen(2007)}]{Kermarrec07}
+{\bf Kermarrec, A.-M.} and {\bf M.~van Steen} (2007).
+\newblock {Gossiping in Distributed Systems}.
+\newblock {\em SIGOPS Oper. Syst. Rev.\/}, {\bf 41}(5), 2--7.
+\newblock ISSN 0163-5980.
+
+\bibitem[{Kraska {\em et~al.\/}(2013)Kraska, Pang, Franklin, Madden, and
+  Fekete}]{Kraska13}
+{\bf Kraska, T.}, {\bf G.~Pang}, {\bf M.~J. Franklin}, {\bf S.~Madden}, and
+  {\bf A.~Fekete}, {MDCC: Multi-Data Center Consistency}.
+\newblock {\em In\/} {\em Proceedings of the 8th ACM European Conference on
+  Computer Systems\/}, EuroSys '13. 2013.
+\newblock ISBN 9781450319942.
+
+\bibitem[{Lakshman and Malik(2010)}]{10.1145/1773912.1773922}
+{\bf Lakshman, A.} and {\bf P.~Malik} (2010).
+\newblock {Cassandra: A Decentralized Structured Storage System}.
+\newblock {\em SIGOPS Oper. Syst. Rev.\/}, {\bf 44}(2), 35--40.
+\newblock ISSN 0163-5980.
+
+\bibitem[{Lamport(2001)}]{lamport2001paxos}
+{\bf Lamport, L.} (2001).
+\newblock {Paxos Made Simple}.
+\newblock {\em ACM SIGACT News (Distributed Computing Column) 32, 4 (Whole
+  Number 121, December 2001)\/}, 51--58.
+\newblock
+  \urlprefix\url{https://www.microsoft.com/en-us/research/publication/paxos-made-simple/}.
+
+\bibitem[{Li {\em et~al.\/}(2012)Li, Porto, Clement, Gehrke, Pregui\c{c}a, and
+  Rodrigues}]{Li12}
+{\bf Li, C.}, {\bf D.~Porto}, {\bf A.~Clement}, {\bf J.~Gehrke}, {\bf
+  N.~Pregui\c{c}a}, and {\bf R.~Rodrigues}, {Making Geo-Replicated Systems Fast
+  as Possible, Consistent When Necessary}.
+\newblock {\em In\/} {\em Proceedings of the 10th USENIX Conference on
+  Operating Systems Design and Implementation\/}, OSDI'12. 2012.
+\newblock ISBN 9781931971966.
+
+\bibitem[{Lloyd {\em et~al.\/}(2011)Lloyd, Freedman, Kaminsky, and
+  Andersen}]{Llyod11}
+{\bf Lloyd, W.}, {\bf M.~J. Freedman}, {\bf M.~Kaminsky}, and {\bf D.~G.
+  Andersen}, {Don't Settle for Eventual: Scalable Causal Consistency for
+  Wide-Area Storage with COPS}.
+\newblock {\em In\/} {\em Proceedings of the Twenty-Third ACM Symposium on
+  Operating Systems Principles\/}, SOSP '11. 2011.
+\newblock ISBN 9781450309776.
+
+\bibitem[{Milano and Myers(2018)}]{Milano18}
+{\bf Milano, M.} and {\bf A.~C. Myers}, {MixT: A Language for Mixing
+  Consistency in Geodistributed Transactions}.
+\newblock {\em In\/} {\em Proceedings of the 39th ACM SIGPLAN Conference on
+  PLDI\/}. 2018.
+\newblock ISBN 9781450356985.
+
+\bibitem[{Riak()}]{Riak}
+Riak (2020).
+\newblock {Riak: Enterprise NoSQL Database}.
+\newblock \urlprefix\url{https://riak.com/}.
+
+\bibitem[{Shapiro {\em et~al.\/}(2011)Shapiro, Pregui{\c{c}}a, Baquero, and
+  Zawirski}]{Shapiro11}
+{\bf Shapiro, M.}, {\bf N.~Pregui{\c{c}}a}, {\bf C.~Baquero}, and {\bf
+  M.~Zawirski}, {Conflict-free Replicated Data Types}.
+\newblock {\em In\/} {\em Symposium on Self-Stabilizing Systems\/}. Springer,
+  2011.
+
+\bibitem[{Sivaramakrishnan {\em et~al.\/}(2015)Sivaramakrishnan, Kaki, and
+  Jagannathan}]{Sivaramakrishnan15}
+{\bf Sivaramakrishnan, K.}, {\bf G.~Kaki}, and {\bf S.~Jagannathan},
+  {Declarative Programming over Eventually Consistent Data Stores}.
+\newblock {\em In\/} {\em Proceedings of the 36th ACM SIGPLAN Conference on
+  PLDI\/}. 2015.
+\newblock ISBN 9781450334686.
+
+\bibitem[{Viotti and Vukoli\'{c}(2016)}]{Viotti16}
+{\bf Viotti, P.} and {\bf M.~Vukoli\'{c}} (2016).
+\newblock {Consistency in Non-Transactional Distributed Storage Systems}.
+\newblock {\em ACM Comput. Surv.\/}, {\bf 49}(1).
+\newblock ISSN 0360-0300.
+
+\end{thebibliography}

@@ -1,0 +1,251 @@
+\chapter{RISK MEASURES}
+\label{sec:background}
+This chapter provides background on risk measures and their different frameworks. First, we discuss the Mean-Variance framework along with its functionality and limitations. After that, we see quantile based risk measures VaR and CVaR with their properties. At last, we look at spectral risk measure and why it is better than other risk measures.
+
+
+First of all, we consider an example to understand the risk measure. Suppose A person has a meeting at his office in 90 minutes. He has two routes to choose, route A  has to mean delay (loss) of 50 minutes and worst-case delay as 5 hours whereas route B has a mean delay of 60 minutes and worst-case delay of 80 minutes. So, which route will he choose? If he chooses route based on minimum expected delay, i.e., route A, then he might get late for the meeting as route A has the worst delay as 5 hours. So, to tackle this situation, we need risk measures, which considers given worst-case delays, and maps loss distribution to a real number. Next, we will discuss different risk measures with their properties and limitations. 
+
+
+%This chapter introduces the concept of CVaR (building on the VaR concept) in the way that it
+%was first introduced - a financial risk measure. In Section 2.1 the mathematical definitions of VaR
+%and CVaR are given, followed by an intuitive description of their properties and interactions.
+%Section 2.2 presents the axioms that must be satisfied for a risk measure to be considered
+%coherent. Specifically, an example is shown to prove that VaR is not subadditive - whereas for
+%the same example, CVaR is subadditive. Finally, Section 2.3 explores the CVaR concept in
+%more detail, giving different algorithms and optimization programmes to calculate the CVaR of
+%a given loss distribution in a variety of settings. Section 2.4 states Acerbi’s Integral Formula to
+%calculate CVaR and gives an alternative proof of the formula.
+%
+%
+%This chapter provides background on stochastic optimization and reinforcement learning.
+%An introduction to the MDP framework and the well-known dynamic programming (DP)
+%algorithms are presented first. Thereafter, the classic reinforcement learning algorithms,
+%which include temporal-difference (TD) learning and Q-learning, are described. The last
+%topic covered here includes the important idea of function approximation to handle the
+%curse of dimensionality associated with high-dimensional state spaces. For an excellent
+%introduction to reinforcement learning methods, the reader is referred to Bertsekas and
+%Tsitsiklis [1996b], Sutton and Barto [1998b]. In the area of stochastic optimization, we
+%briefly discuss the well-known SPSA algorithm.
+%The topics covered in this chapter essentially provide the foundation for the entire the-
+%sis, as we develop several resource allocation algorithms in a variety of application contexts
+%using stochastic optimization and reinforcement learning techniques.
+
+%\section{Basic Notions in the Risk Framework}
+%\begin{definition}[ (\citep{dowd2007measuring}, p. 45 ) Probability distribution function ]
+%	A probability density function (pdf) gives the probability that a random variable will take a
+%	particular value, or take a value in a particular range. More formally, the probability that a
+%	random variable X falls between a and b can be written as:
+%	\begin{equation}
+%		\operatorname{Pr}[a<X<b]=\int_{a}^{b} f(x) d x \label{pdf}
+%\end{equation}
+%where $\textrm{f(x)}$ is the pdf.
+%\end{definition}
+%
+%\noindent The pdf must be non-negative for all values of $x(\text { i.e., } f(x) \geq 0 \text { for all } x)$ and the integral of Equation \ref{pdf} over all possible $\textrm{x}$ values must be 1:
+%\begin{equation}
+%	\int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} f(x) d x=1
+%\end{equation}
+%where $x_{\min }$ and $x_{\max }$ are the minimum and maximum values of $x,$ and will in many cases be $-\infty$ and $\infty$
+%
+%\begin{definition}[ (\citep{dowd2007measuring}, p. 45 ) Cumulative density function] Corresponding to the pdf $f(x)$ is the cumulative density function $F(x)$ (cdf, sometimes known as the distribution function). This gives the probability that $X$ will be less than or equal to a particular value $x:$
+%	\begin{equation}
+%	F(x)=\operatorname{Pr}[X \leq x]=\int_{x_{\min }}^{x} f(u) d u
+%	\end{equation}	
+%\end{definition}
+%\noindent $F(x)$ varies from 0 to 1. It takes the value 0 when $X$ is at its minimum value (i.e., $F\left(x_{\min }\right)=0$ ). and it takes the value 1 when $X$ is at its maximum value (i.e., $F\left(x_{\max }\right)=1$ ). The probability that $X \text { exceeds } x \text { is } 1 \text { minus the probability that } X \leq x \text { (i.e., Pr[X }>x]=1-F(x)$ ).
+%
+%Note also that in risk measurement we are often very interested in the $x$ -value that corresponds to a given cumulative probability or confidence level. This $x$ -value is the inverse of a cdf, given by $x=F^{-1}(p),$ where $p$ is a specified cumulative probability. $x$ is often known as a quantile or percentile point, and the VaR itself is just a quantile.
+%
+%\begin{definition}[(\citep{kaltenbach2011concise}, p, 17), Expectation]. The expectation, sometimes called expected value or mean, of a random variable $X$ is defined as
+%	\begin{align}
+%	\mathbb{E}[X]&:=\int_{-\infty}^{\infty} x f(x) d x \quad \text { in the continous case }\\
+%	\mathbb{E}[X]&:=\sum_{k=-\infty}^{\infty} k P(X=k) \quad \text { in the discrete case }
+%	\end{align}
+%	where $f(x)$ is the probability density function of $X$ and $P(X=k)$ is the probability mass function
+%	$X$
+%\end{definition}
+%
+%\begin{definition}[(\citep{kaltenbach2011concise}, p. 18), Variance] 
+%	The variance of a random variable $X$ is defined as
+%	\begin{equation}
+%		\operatorname{Var}(X)=\mathbb{E}\left[(X-\mathbb{E}[X])^{2}\right]
+%	\end{equation}
+%\end{definition}
+
+
+
+\section{Mean-Variance risk measure (MVRM)}
+\subsection{Basics of MVRM}
+Mean-variance risk measure \citep{dowd2007measuring} is a traditional approach of measuring risk, where risk is formulated in terms of mean and variance of the loss distribution. We assume that the underlying loss distribution follows a normal distribution. A random variable $\textrm{X}$ is normally distributed with mean $\mu$ and variance ${\sigma}^2$, if the probability that $\textrm{X}$ takes the value $\textrm{x}$ with pdf:
+\begin{equation*}
+\textrm{f(x)} = \frac{1}{\sqrt{2 \pi}\sigma} \exp \left[-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right]
+\end{equation*} 
+where $\textrm{x}\in(-\infty,+\infty)$.
+
+A pdf gives the idea about possible outcomes and how likely these outcomes are. The normal distribution pdf is the bell-like curve, which improvises that outcomes are likely to occur close to the mean $\mu$, and the spread around the mean depends on the standard deviation $\sigma$. In the mean-variance framework, the standard deviation is used as a measure of risk. 
+
+\subsection{Working of MVRM}
+To explain how the mean-variance method works, suppose we wish to choose a particular route from a set of routes. We are only concerned about the expected delay on the route and the variance of its delays. The various possibilities of routes with their expected delay and variance of delay are shown by the curve (efficient frontier curve) in Figure \ref{mv_ef}. Since user regards a lower expected delay as 'best' and higher variance of delays (i.e higher risk) as 'worst', the user wants to achieve the lowest possible expected delay for any given level of risk; or equivalently, want to achieve the lowest possible level of risk for any given expected delay. A user who is more risk-averse will choose a point on the efficient curve with low risk or lower variance route, while a less risk-averse user will choose a point with higher risk, which might end up choosing a route with lower delay.     
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.8\columnwidth]{img/mv_ef1.pdf}
+	\caption{The mean-variance efficient frontier curve.}
+	\label{mv_ef}
+	\end{center}
+\end{figure}
+\subsection{Limitations of MVRM}
+However, the variance is not an adequate risk measure when underlying loss distribution is non-normal distributions. For example, see figure \ref{mv_compare}, we have two distributions with the same mean and variance. The mean-variance method results in the same risk for both the distributions. Nevertheless, the heavy-tailed distribution has a longer tail, having more likely outcomes in the extreme tail region. Hence, if normality, along with symmetric conditions on the distribution (elliptical distributions) is not strictly followed, the mean-variance method can give misleading estimates of risk.
+
+\begin{figure}[h]
+\begin{center}
+	\includegraphics[width=\columnwidth]{img/mv_compare.png}
+	\caption{Normal distribution and skewed normal distribution}
+	\label{mv_compare}
+\end{center}
+\end{figure}
+\section{Value-at-Risk (VaR)}
+\subsection{Basics of VaR}
+As we have already seen, mean-variance risk measure works with elliptical distributions (distribution that can be generalized as the multivariate normal distribution). Therefore, we need another risk-measure that will be independent of the underlying distribution. Now, we want to be more focused on the tail of the loss distribution, and it can be addressed by VaR. More formally, for a given confidence level $\beta \in (0,1)$ VaR at level $\beta$ denotes maximum loss that can occur with $(\beta \times100)\%$ confidence.
+\begin{definition}[Value-at-Risk] 
+	For a r.v. $X$,  $\rm{VaR}$ $\mathrm{V}_\beta(X)$ at level $\beta$, $\beta \in (0,1)$, is defined as follows:
+	\[
+	\mathrm{V}_\beta(X) := \inf \{c: \mathbb{P}(X\le c)\ge \beta \} \label{def:var}
+	\]
+	where $[x]^{+} = \max(0,x)$ for a real number $x$.
+\end{definition}
+	\noindent 
+	%$\mathrm{V}_\beta(X)$ can be interpreted as the minimum loss that will not be exceeded with probability $\beta$. 
+	Note that, if $X$ has a continuous and strictly increasing cumulative distribution function (CDF) $F$, then $\mathrm{V}_\beta(X)$ is a
+	solution to the following:
+	\[	\mathbb{P}[X\le\xi] = \beta, \,\, \text{i.e., } \mathrm{V}_\beta(X) = F^{-1}(\beta).\]
+	
+	
+\subsection{Estimation of VaR}
+	Let $X_i$, $i = 1, \ldots , n$ denote i.i.d. samples from the distribution of $X$. Then, the estimate of $\mathrm{V}_\beta(X)$, denoted by $\widehat{\mathrm{V}}_{n, \beta}$, is formed as follows \cite{serfling2009approximation}:
+	\begin{align}
+	\widehat{\mathrm{V}}_{n,\beta} &= \widehat{F}_{n}^{-1}(\beta)  = \inf\{x:\widehat{F}_n(x)\ge \beta\} \label{eq:var-est},
+	\end{align}
+	where $\widehat{F}_{n}(x) = \frac{1}{n}\sum_{i=1}^{n}\mathbb{I}[{X_i \le x}]$ is the EDF of $X$. Letting $X_{(1)}, \ldots, X_{(n)}$ denote the order statistics, i.e., $X_{(1)} \le X_{(2)} \le \dots \le X_{(n)}$, we have $\widehat{\mathrm{V}}_{n,\beta} = X_{(\lceil n\beta \rceil)}$.
+
+\subsection{Derivative of VaR}
+	We recall a result from \cite{dufour1995distribution} below.
+\begin{lemma}\label{lemma:var-derivatives} Let $F$ and $f$ are respectively probabilty distribution function and probability density function of continuous r.v. $X$, and 
+	if F has a positive continuous density f in a neighborhood of $\mathrm{V}_{\beta}$ $\left(\mathrm{V_{\beta}(X)}\right)$ , where $0<\beta<1$, then $\mathrm{V_{\beta}}$ is twice differentiable w.r.t. $\beta$.
+	\begin{align*}
+	\mathrm{V}_\beta^{'} &=\frac{1}{f\left(\mathrm{V}_\beta\right)}, \quad
+	\mathrm{V}_\beta^{''} = -\frac{f^{'}\left(\mathrm{V}_\beta\right)}{{ f\left(\mathrm{V}_\beta\right)}^3}
+	\end{align*}
+\end{lemma}
+
+\begin{proof}
+	Notice that			$F(F^{-1}(\beta)) = \beta$, which implies  
+	\begin{align}
+	F^{\prime}(F^{-1}(\beta))F^{{-1}^{\prime}}(\beta) & = 1, \textrm{ and } 
+	F^{''}(F^{-1}(\beta))(F^{-1'}(\beta))^2 
+	+ \, F^{'}(F^{-1}(\beta))F^{-1''}(\beta) & = 0 \label{eq:second}
+	\end{align}
+	From  \eqref{eq:second}, we have
+	\begin{align*}
+	\mathrm{V}_\beta^{'} = F^{-1'}(\beta) &= \frac{1}{ F^{\prime}(F^{-1}(\beta))}=\frac{1}{ f(F^{-1}(\beta))}=\frac{1}{f\left(\mathrm{V}_\beta\right)}, \textrm{ and }\\
+	\mathrm{V}_\beta^{''} = F^{-1''}(\beta) &= -\frac{ F^{''}(F^{-1}(\beta))(F^{-1'}{(\beta))}^2}{F^{'}(F^{-1}(\beta))}
+	= -\frac{ f^{'}(F^{-1}(\beta)){(F^{-1'}(\beta))}^2}{f(F^{-1}(\beta))}\\
+	&= - f^{'}(F^{-1}(\beta))(F^{-1'}(\beta))^3= -\frac{f^{'}\left(F^{-1}\left(\beta\right)\right)}{{ f\left(F^{-1}\left(\beta\right)\right)}^3} -\frac{f^{'}\left(\mathrm{V}_\beta\right)}{{ f\left(\mathrm{V}_\beta\right)}^3} %\tag{since $F^{-1}(\beta) = \mathrm{V}_\beta$}
+	\end{align*}
+\end{proof}
+\subsection{Limitations of VaR}
+Apart from the advantages of VaR that it is a general risk measure, VaR has some limitations also. VaR at level $\beta$ does not give any idea about, how much is ((1-$\beta)\times100)\%$ tail (worst case) loss. Moreover, if the tail event occurs, we definitely lose more than VaR, and this can lead to undesirable outcomes. For example, some route has a low expected delay but also involves the possibility of higher delays, and a VaR risk measure based decision might lead to adopting this route, regardless of the size of higher delay outcomes.  
+
+\section{Coherent Risk Measure}
+\label{sec:coherence} 
+%Coherence is a way to evaluate a risk measure. 
+Artzner et al. studied risk measures \citep{artzner1999coherent} and postulated a set of four axioms that need to be true in order to qualify a risk measure as coherent. We try to understand the four axioms using an example, given two loss random variables $A$ and $B$, and $\mathbb{R(.)}$ denote a risk measure. Then  $\mathbb{R(.)}$ is said to be a coherent measure of risk if it satisfies the following conditions:
+
+\begin{enumerate}
+	\item \textit{Monotonicity}: $A \le B \implies \mathbb{R}(A) \le \mathbb{R}(B) \,\,\, \text{for all } A, B.$ This condition states that the greater the expected loss, the greater is the risk.
+	\item \textit{Sub-additivity}: $\mathbb{R}(A + B) \le \mathbb{R}(A) + \mathbb{R}(B) \,\,\, \text{for all } A, B.$ It is a diversification principle, states that the total risk can never be greater than the sum of the individual risk.
+	\item \textit{Positive homogeneity}: $\mathbb{R}(\lambda A) = \lambda \mathbb{R}(A) \,\,\, \text{for all } X, \lambda \ge 0$. It states that risk gets scaled by the size of the loss.
+	\item \textit{Translational invariance}: $\mathbb{R}(A + c) = \mathbb{R}(A) + c \,\,\, \text{for all } X, c$. It states that on decreasing (or increasing), the loss decreases (or increases) risk by the same amount.
+	
+\end{enumerate}
+
+\noindent VaR is not a coherent risk measure as it violates sub-additive condition  \citep{artzner1999coherent}. However, for a particular case of elliptical distributions, VaR becomes a coherent risk measure. Given these limitations of VaR, we need another risk measure, which includes not only the benefits of VaR but also a coherent risk measure. 
+
+\section{Conditional Value-at-Risk (CVaR)}
+\subsection{Basics of CVaR}
+\begin{definition}[Conditional Value-at-Risk]
+	For a r.v. $X$ and $\mathrm{VaR}$ $\mathrm{V}_\beta(X)$, $\mathrm{CVaR}$ $\mathrm{C}_\beta(X)$ at the level $\beta$, $\beta \in (0,1)$, is defined as follows:
+	\begin{align} 
+	&\mathrm{C}_\beta(X) := \mathrm{V}_\beta(X) \,\, + \frac{1}{1-\beta}\mathbb{E}[X - \mathrm{V}_\beta(X)]^{+}, \label{def:cvar}
+	\end{align}
+	where $[x]^{+} = \max(0,x)$ for a real number $x$.
+\end{definition}
+Conditional value-at-risk or expected shortfall $\mathrm{C}_\beta(X)$ can be interpreted as the expected loss, conditional on the event that the loss exceeds $\mathrm{V}_\beta(X)$, i.e., 
+$\mathrm{C}_{\beta}(X) = \mathbb{E}[X|X\ge \mathrm{V}_\beta(X)]$. See figure \ref{fig:var_cvar}, unlike Var, CVaR gives an idea about how adverse can be outcomes on an average after VaR. CVaR is a sub-additive risk measure, and it also satisfies other conditions of coherence given in section \ref{sec:coherence}, and therefore coherent risk measure (\citep{artzner1999coherent}, proposition 2.16).
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=\columnwidth]{img/var_cvar.png}
+		\caption{$\mathrm{VaR} \text{ and } \mathrm{CVaR}$ at level $\beta$ of a random variable \textrm{X} representing loss.}
+		\label{fig:var_cvar}
+	\end{center}
+\end{figure}
+
+\subsection{Estimation of CVaR}
+%%%%%%%%%%%%%%%% Empirical Var and CVaR 
+Let $X_i$, $i = 1, \ldots , n$ denote i.i.d. samples from the distribution of $X$. Then, the estimates of $\mathrm{C}_\alpha(X)$, denoted by  $\widehat{\textrm{CVaR}}_{n, \alpha}$, is formed as follows:
+\begin{align}
+\widehat{\mathrm{CVaR}}_{n,\alpha} & = \widehat{\mathrm{V}}_{n,\alpha} +  \frac{1}{n(1-\alpha)}\sum_{i=1}^{n}\left[X_i - \widehat{\mathrm{V}}_{n,\alpha}\right]^{+},\label{eq:cvar-est}
+\end{align}
+where $\widehat{\mathrm{V}}_{n,\alpha}$ is a VaR estimator given in \eqref{eq:var-est}.
+
+\subsection{CVaR Acerbi's formula}
+Acerbi's formula \citep{acerbi2002coherence}, an alternative form for $\mathrm{C_\alpha}(X)$ defined in \eqref{def:cvar}, is as follows: 
+\begin{align}
+\mathrm{C}_{\alpha}(X) = \frac{1}{1-\alpha}\int_{\alpha}^{1}\mathrm{V}_{\beta}(X)\,d\beta.\label{eq:acerbi}
+\end{align}
+From the expression above, $\mathrm{C}_{\alpha}(X)$ can be interpreted as the average of $\mathrm{V}_{\beta}(X)$ for $\beta \in [\alpha ,1)$.
+
+\section{Spectral Risk Measure (SRM)}
+\begin{definition}[Spectral risk measures $(\textrm{SRM})$] are a generalization of $\mathrm{CVaR}$, and are defined as follows:
+	\begin{align}
+	\mathrm{S}(X) = \int_{0}^{1}\varphi(\beta)\mathrm{V}_{\beta}(X)\,d\beta.\label{def:srm}
+	\end{align}
+	where, $\varphi(\cdot)$ is a risk-aversion function and $\mathrm{V_\beta(X)}$ is the $\beta$-quantile of the distribution of the r.v. $X$.
+\end{definition}
+
+%In the equation above, $\varphi(\cdot)$ is a risk-aversion function, which can be chosen to ensure that SRM is a coherent risk measure \cite{acerbi2002spectral} and $V_\beta$ is the $\beta$-quantile of the distribution of the r.v. $X$.
+\noindent SRM can be seen as a weighted average of the quantiles (VaR) of the underlying distribution. Moreover, CVaR can be recovered by setting:
+\begin{align}
+% \frac{1}{1-\alpha}\indic{\beta>\alpha},\, \alpha \in (0,1)	
+\varphi(\beta) =\left\{\begin{array}{ll}
+{0} & {\beta<\alpha} \\
+{1 /(1-\alpha)} & {\beta \geq \alpha}
+\end{array}\right.
+\end{align}
+The latter choice translates to an equal weight for all tail-loss VaR values.
+
+
+Risk aversion function $\varphi(\cdot)$ can be chosen to ensure that SRM is a coherent risk measure \cite{acerbi2002spectral}. In particular, following properties are satisfied for ensuring coherence.
+\begin{itemize}
+	\item \textit{Postivity:} $\varphi(\beta)\geq 0$ for all $\beta \in (0,1)$
+	\item \textit{Increasingness:} $\varphi^{\prime}(\beta)\geq 0$ for all $\beta \in (0,1)$
+	\item \textit{Normalization:} $\int_{0}^{1} \varphi(\beta) d\beta = 1$
+\end{itemize}
+ %a non-negative, increasing $\varphi$ that integrates to $1$ is sufficient for ensuring coherence. 
+ In contrast, SRM can model a user's risk-aversion better, since the function $\varphi$ can be chosen such that higher losses receive a higher weight, or at least, the same weight as lower losses \cite{dowd2006after}. An example of risk-aversion function is exponential utility function:
+ \begin{align}
+ 	\varphi(\beta)=\frac{k e^{-k(1-\beta)}}{1-e^{-k}}
+ \end{align} 
+where $\beta \in (0,1)$, and $k \in (0,\infty)$ reflects the user's degree of risk-aversion. 
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=\columnwidth]{img/risk_spectrum.png}
+		\caption{Exponential utility function.}
+		\label{fig:risk_spectrum}
+	\end{center}
+\end{figure}
+
+\noindent In the figure \ref{fig:risk_spectrum}, a exponential utility function is illustrated. This shows how weights $\varphi(\beta)$ increases with the cummulative probability $\beta$. For more risk-averse user we use larger value of $k$ and for less risk-averse user smaller value of k, see weight curves in figure \ref{fig:risk_spectrum}. 
+
+Hence, SRM is a generalized coherent risk measure with its own subjective risk aversion $\varphi(.)$, which in turns give personalise risk-measure as per user risk profile. In the next chapter we propose a novel estimation technique for SRM, together with a finite sample analysis for our estimation.   
+
